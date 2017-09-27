@@ -36,8 +36,14 @@ public:
 
       for (llvm::Function::iterator bi = func->begin(), be = func->end();
            bi != be; ++bi) {
-        for (llvm::BasicBlock::iterator ii = bi->begin(), ie = bi->end();
-             ii != ie; ++ii) {
+        llvm::TerminatorInst *ti = bi->getTerminator();
+        llvm::errs() << "BRANCH: ";
+        ti->dump();
+        unsigned numSuccessors = ti->getNumSuccessors();
+        for (unsigned i = 0; i < numSuccessors; ++i) {
+          llvm::BranchProbability prob = BPI.getEdgeProbability(&(*bi), i);
+          llvm::errs() << "EDGE " << i << " PROBABILITY: ";
+          prob.dump();
         }
       }
     }
