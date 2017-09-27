@@ -7,7 +7,7 @@ CXX=clang++
 CXXFLAGS=`llvm-config --cxxflags` -std=c++11 -D_GLIBCXX_USE_CXX11_ABI=0
 LDFLAGS=`llvm-config --ldflags`
 LDLIBS=`llvm-config --libs` -lpthread -lncurses -ldl
-EXAMPLES=
+EXAMPLES=matmul.bc simple_loop.bc
 
 TARGETS=PrintBranchProbability ${EXAMPLES}
 
